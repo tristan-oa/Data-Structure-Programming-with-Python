@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title> UM IT Account - University of Malta </title>
+  <link rel="icon" href="https://www.um.edu.mt/__data/assets/file/0015/2922/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="https://www.um.edu.mt/__data/assets/file/0015/2922/favicon.ico" type="image/x-icon" />
+<link rel="stylesheet" type="text/css" href="https://accounts.um.edu.mt/sign-in/v3/sign-in.1.css" media="screen" />
+<script type="text/javascript">
+<!--
+function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+} // end of readCookie()
+
+function checkAlreadyAuth() {
+    if (submitted) {
+        return null;
+    }
+    var isCookie = readCookie('UoMAuthStatus');
+    if (isCookie) {
+        window.location = 'https://www.um.edu.mt/vle/pluginfile.php/435365/mod_resource/content/1/DSA.Coursework.Feb2019.pdf';
+    }
+}
+//-->
+</script>
+<script type="text/javascript">
+<!--
+var submitted = false;
+
+function checkLogin() {
+  var username = document.getElementById('login').value;
+  if (username.indexOf('.') != -1 && username.indexOf('@') == -1) {
+    username += '@um.edu.mt';
+    document.getElementById('login').value = username;
+  }
+
+  checkLimited();
+}
+
+function checkSubmit() {
+        if (document.login_form.login.value.length < 1) {
+                document.login_form.login.focus();
+                return false;
+        }
+        if (document.login_form.pass.value.length == 0) {
+                document.login_form.pass.focus();
+                return false;
+        }
+        
+	submitted = true;
+        return true;
+}
+
+
+function checkSubmit2(){
+	if ( document.getElementById("login_form").getAttribute("data-submit") == "true") {
+		if ( document.login_form.login.value.length < 1 ) {
+			document.login_form.login.focus();
+			return false;
+		} else if ( document.login_form.pass.value.length == 0 ) {
+			document.login_form.pass.focus();
+	        	return false;
+    		} else {
+	        	document.getElementById("login_form").setAttribute("data-submit", "false");
+			//console.log('submit2');
+			document.getElementById("login_form").submit();
+		} //end else
+	} else {
+		//form has already need submitted..    
+		return false;
+	}
+return false;
+} //end function checkSubmit2
+
+
+function checkSubmit2_test(){
+        if ( document.getElementById("login_form").getAttribute("data-submit") == "true") {
+                if ( document.login_form.login.value.length < 1 || document.login_form.pass.value.length == 0 ) {
+                        return false;
+                } else {
+			console.log('submit');
+                        document.getElementById("login_form").setAttribute("data-submit", "false");
+			return false;
+                } //end else
+        } else {
+                //form has already need submitted..
+                return false;
+        }
+return false;
+} //end function checkSubmit2
+
+
+function checkLimited() {
+  var username = document.getElementById('login').value;
+  if (username.substr(-8) == '@fpei.mt') {
+	url = window.location.href;
+        window.location = url.replace('https://accounts.um.edu.mt/sign-in/go/', 'https://accounts.um.edu.mt/other/go/' + encodeURIComponent(username) + '/');
+  }
+  return true;
+}
+//-->
+</script>
+
+
+<script type="text/javascript" src="https://www.um.edu.mt/include/jquery/jquery-1.10.2.min.js"></script>
+
+
+<script type="text/javascript">
+
+if (top != self) {
+    top.location.href = document.location.href;
+}
+
+$(document).ready(function(){
+	$('#pass').keypress(function(e) {
+                ascii = e.which;
+                var s = String.fromCharCode( ascii);
+
+                    if ( (ascii < 65 || ascii > 99) && (ascii < 97 || ascii > 122) ) {
+                        return;
+                    }
+
+                    if ( s.toUpperCase() === s && s.toLowerCase() !== s && !e.shiftKey ) {
+                        $('#capsWarn').css('visibility','visible');
+                    } else {
+                        $('#capsWarn').css('visibility','hidden');
+                        } //end if
+        });
+
+ });
+
+ </script>
+
+</head>
+<body text="#000000" link="#0000FF" vlink="#0000FF" bgcolor="#FFFFFF" onFocus="checkAlreadyAuth();">
+
+<div id="main">
+  <div id="header">
+    <div class="logo">
+      <a href="https://www.um.edu.mt"><img alt="University of Malta" src="https://www.um.edu.mt/__data/assets/image/0020/327116/logo-new.jpg" border="0" height="110" width="396"></a>
+    </div>
+  </div>
+
+  <div id="body">
+    <div id="signin-container" class="signin-container">
+
+      <div id="signin-header">
+        Sign in to UM IT Account
+      </div>
+      <div id="signin-content">
+
+	<form id="login_form" name="login_form" data-submit="true" action="https://accounts.um.edu.mt/sign-in/login-accounts.php" method="post" onsubmit="return checkSubmit2();" data-test="true">
+	
+	<input type="hidden" name="REDIRECT_URI" value="https://www.um.edu.mt/vle/pluginfile.php/435365/mod_resource/content/1/DSA.Coursework.Feb2019.pdf" />
+	<input type="hidden" name="REDIRECT_QUERYSTRING" value="" />
+
+        <label for="login"><span id="loginlabel">Email address or Username</span></label>
+        <input type="text" spellcheck="false" name="login" id="login" value="" onchange="checkLogin()" />
+        <label for="password"><span id="passlabel">Password</span></label>
+        <input type="password" name="password" id="pass"/>
+        <div id="signin-box" style="padding: 0px; position:relative">
+
+		
+	
+		 <div id="capsWarn" style="position:absolute; top:10px; left:100px; visibility:hidden; display:inline;">
+			<div style="float:left;">
+				<img src="https://www.um.edu.mt/include/images/capsWarn.jpg" width="17" height="15" alt="Caps Lock On" title="Caps Lock On">
+			</div> 
+			 <span style="float:right; margin-left:5px; font-weight:bold;">Caps Lock is On</span>
+			
+		</div>
+          <a href="#" onclick="checkSubmit2();" id="signin-btn" >Sign in</a>
+	  <input type="submit" style="visibility: hidden; margin: 0; padding: 0;" />
+        </div>
+        <div id="signin-help">
+          <a href="http://www.um.edu.mt/itservices/help/signin">Sign in Problems?</a>
+        </div>
+
+<input type="hidden" name="info[swf]" id="swfinfo" />
+<input type="hidden" name="info[pdf]" id="pdfinfo" />
+<input type="hidden" name="info[java]" id="javainfo" />
+<input type="hidden" name="info[javavm]" id="javavminfo" />
+<input type="hidden" name="info[javaen]" id="javaeninfo" />
+
+	</form>
+  
+        <hr noshade="noshade" style="margin: 20px 0"/>
+  
+        <div id="signin-notice">
+  UM IT Account password is only requested at<br /> https://accounts.um.edu.mt/
+<br />  Make sure to sign out (top right) when done.
+        </div>
+      </div>
+    </div>
+    <div id="about-container">
+<style>
+<!--
+h2 {
+    margin-top: 0;
+}
+div#newbox {
+text-align:left;
+}
+div#newbox a {
+text-decoration:none;
+color:#336699;
+}
+
+div#newbox a:hover {
+text-decoration: underline;
+color:#000099;
+}
+div.alignright{
+text-align:right;
+font-weight:bold;
+font-style:italic;
+}
+
+div#logo {
+	float:right;
+	margin-top:20px;
+	margin-bottom:10px;
+}
+div#logo img {
+	border: 1px solid #fff;
+	border-radius:25px;
+	width:100px;
+}
+div#title {
+        float:left;
+	width:350px;
+	text-align:justify;
+	margin-bottom:10px;
+}
+
+div#video {
+	margin:auto;
+        margin-bottom:20px;
+
+}
+
+--
+</style>
+
+<div id="newbox">
+
+    <h2>UM Brand Manual</h2>
+		<p>The latest University brand manual is now available for staff, students and the general public.</p><p><b><a href="https://www.um.edu.mt/brandmanual" target="_blank" style="color:#BA0C2F">Download the UM brand manual</a></b></p>
+	<div id="video">
+		<iframe width="480" height="325" src="//www.youtube.com/embed/E8YaiiPRIvU?rel=0" frameborder="0" allowfullscreen=""></iframe>
+	</div>
+</div>
+
+    </div>
+  
+  
+  <div id="footer">
+    <div id="footer-left">
+      University of Malta, Msida MSD 2080, Malta<br />
+      Tel: +356 2340 2340 - Fax: +356 2340 2342
+    </div>
+
+    <div id="footer-sep1">
+    </div>
+    
+    <div id="footer-sm">
+	<a href="http://www.facebook.com/universityofmalta" target="_blank"><img src="https://www.um.edu.mt/__data/assets/image/0006/166983/facebook-icon-25.png" title="Facebook" alt="Facebook" /></a>
+            <a href="http://twitter.com/uniofmalta" target="_blank"><img src="https://www.um.edu.mt/__data/assets/image/0007/166984/twitter-icon-25.png" title="Twitter" alt="Twitter" /></a>
+        <a href="http://www.youtube.com/universityofmalta" target="_blank"><img src="https://www.um.edu.mt/__data/assets/image/0009/166986/youtube-icon-25.png" title="YouTube" alt="YouTube" /></a> 
+    </div>
+
+    <div id="footer-sep2">
+    </div>
+    
+	<div id="footer-disc">
+      <a href="http://www.um.edu.mt/privacy">Privacy Policy</a> |
+      <a href="http://www.um.edu.mt/disclaimer">Disclaimer</a> |
+      <a href="http://www.um.edu.mt/accessibility">Accessibility Policy</a> | &copy; University of Malta, All Rights Reserved.
+      <br />
+      Reproduction/Copying in whole or part is strictly prohibited.
+    </div>
+    <span class="stretch"></span>
+  </div>
+
+ </div>
+</div>
+
+<script type="text/javascript"><!--
+document.login_form.login.focus();
+
+
+if (typeof navigator.mimeTypes['application/pdf'] !== 'undefined') {
+    document.login_form.pdfinfo.value = navigator.mimeTypes['application/pdf'].enabledPlugin.name + '||' + navigator.mimeTypes['application/pdf'].enabledPlugin.description;
+}  
+if (typeof navigator.mimeTypes['application/x-shockwave-flash'] !== 'undefined') {
+    document.login_form.swfinfo.value = navigator.mimeTypes['application/x-shockwave-flash'].enabledPlugin.name + '||' + navigator.mimeTypes['application/x-shockwave-flash'].enabledPlugin.description + '||' + navigator.mimeTypes['application/x-shockwave-flash'].enabledPlugin.version;
+}  
+if (typeof navigator.mimeTypes['application/x-java-applet'] !== 'undefined') {
+    document.login_form.javainfo.value = navigator.mimeTypes['application/x-java-applet'].enabledPlugin.name + '||' + navigator.mimeTypes['application/x-java-applet'].enabledPlugin.description;
+}
+if (typeof navigator.mimeTypes['application/x-java-vm'] !== 'undefined') {
+    document.login_form.javavminfo.value = navigator.mimeTypes['application/x-java-vm'].enabledPlugin.name + '||' + navigator.mimeTypes['application/x-java-vm'].enabledPlugin.description;
+}
+if (typeof navigator.javaEnabled !== 'undefined') {
+    document.login_form.javaeninfo.value = navigator.javaEnabled();
+}
+
+--></script>
+
+</body></html>
